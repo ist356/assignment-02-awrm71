@@ -32,8 +32,8 @@ import json
 from packaging import parse_packaging, calc_total_units, get_unit
 
 def main():
-    data_file_path = "./data/packaging.txt"
-    json_file_path = "./data/packaging.json"
+    data_file_path = "./assignment-02-awrm71/data/packaging.txt"
+    json_file_path = "./assignment-02-awrm71/data/packaging.json"
     
     all_packages = []
     

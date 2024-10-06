@@ -10,23 +10,20 @@ def parse_packaging(packaging_data: str) -> list[dict]:
 
     for part in parts:
         quantity_item = part.split(' in ', 1)
-        quantity_part = quantity_item[0].strip()  
-        unit_part = quantity_item[1].strip() 
+        quantity_part = quantity_item[0].strip()
+        unit_part = quantity_item[1].strip()
 
+        for part in [quantity_part, unit_part]:
+            quantity, item = part.split(maxsplit=1)
+            quantity = int(quantity)
 
-        quantity, item = quantity_part.split(maxsplit=1)
-        quantity = int(quantity)  
-
-        if item not in seen_units:
-            result.append({item: quantity})
-            seen_units.add(item)
-
-        container_quantity, container = unit_part.split(maxsplit=1)
-        container_quantity = int(container_quantity) 
-
-        if container not in seen_units:
-            result.append({container: container_quantity})
-            seen_units.add(container)
+            if item not in seen_units:
+                result.append({item: quantity})
+                seen_units.add(item)
+            else:
+                for entry in result:
+                    if item in entry:
+                        entry[item] += quantity
 
     return result
 
